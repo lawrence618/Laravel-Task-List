@@ -56,9 +56,11 @@
                                 <a href="{{ route('tasks.edit', $task->id) }}">
                                     <x-primary-button>Edit</x-primary-button>
                                 </a>
-                                <a onclick="return confirm('Are you sure?')">
-                                    <x-danger-button form="delete-form">Delete</x-danger-button>
-                                </a>
+                                @if (auth()->user()->is_admin)
+                                    <a onclick="return confirm('Are you sure?')">
+                                        <x-danger-button form="delete-form">Delete</x-danger-button>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                         
