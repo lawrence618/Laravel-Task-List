@@ -18,7 +18,8 @@
                                     <tr>
                                         <th class="px-6 py-3 bg-gray-50 text-left">
                                             <span
-                                                class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Task Name</span>
+                                                class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Task
+                                                Name</span>
                                         </th>
                                     </tr>
                                 </thead>
@@ -26,9 +27,13 @@
                                 <tbody class="bg-white divide-y divide-gray-200 divide-solid">
                                     <tr class="bg-white">
                                         <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                            <input class="border-0 border-b-2 border-gray-200" type="text"
-                                                id="title" name="title" placeholder="Enter task title"
-                                                required />
+                                            <input
+                                                class="border-0 border-b-2 border-gray-200 @error('title') border-red-500 @enderror"
+                                                type="text" id="title" name="title" placeholder="Enter task title"
+                                                value="{{ old('title') }}" required />
+                                            @error('title')
+                                                <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+                                            @enderror
                                         </td>
                                     </tr>
                                 </tbody>
@@ -44,9 +49,15 @@
                                 <tbody class="bg-white divide-y divide-gray-200 divide-solid">
                                     <tr class="bg-white">
                                         <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                            <textarea class="border-0 border-b-2 border-gray-200" type="text"
-                                                id="description" name="description" placeholder="Enter task description"
-                                                required ></textarea>
+                                            <textarea
+                                                class="border-0 border-b-2 border-gray-200 @error('description') border-red-500 @enderror"
+                                                id="description" name="description" rows="5"
+                                                placeholder="Enter task description"
+                                                required>{{ old('description') }}</textarea>
+
+                                            @error('description')
+                                                <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+                                            @enderror
 
                                         </td>
                                     </tr>
@@ -57,21 +68,10 @@
                                 <a href="{{ route('tasks.index') }}">
                                     <x-secondary-button>Cancel</x-secondary-button>
                                 </a>
-                                <a href="">
+                                <a>
                                     <x-primary-button>Add task</x-primary-button>
                                 </a>
                             </div>
-
-                            @if ($errors->any())
-                                <div class="alert alert-danger" style="color: red">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
                         </form>
                     </div>
                 </div>

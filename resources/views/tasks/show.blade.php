@@ -25,8 +25,6 @@
                                                 <span
                                                     class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Status</span>
                                             </th>
-                                                <th class="px-6 py-3 bg-gray-50 text-left">
-                                                </th>
                                         </tr>
                                     </thead>
 
@@ -38,22 +36,37 @@
                                                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                                     {{ $task->description }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                                    {{ $task->is_completed ? 'Completed' : 'Not Completed' }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                                    <a href="{{ route('tasks.edit', $task->id) }}">
-                                                        <x-primary-button>Edit</x-primary-button>
-                                                    </a>
-                                                </td>
+                                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 ">
+                                            @if($task->is_completed)
+                                                <span class="font-medium text-green-500">Completed</span>
+                                            @else
+                                                <span class="font-medium text-red-500">Not Completed</span>
+                                            @endif
+                                        </td>
                                             </tr>
                                     </tbody>
                         </table>
-                        <a href="{{ route('tasks.index') }}">
-                            <x-secondary-button>Back</x-secondary-button>
-                        </a>
+                        <div class="mb-6 flex justify-between">
+                            <div>
+                                <a href="{{ route('tasks.index') }}">
+                                    <x-secondary-button>Back</x-secondary-button>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="{{ route('tasks.edit', $task->id) }}">
+                                    <x-primary-button>Edit</x-primary-button>
+                                </a>
+                                <a onclick="return confirm('Are you sure?')">
+                                    <x-danger-button form="delete-form">Delete</x-danger-button>
+                                </a>
+                            </div>
+                        </div>
                         
                     </div>
+                    <form action="/tasks/{{ $task->id }}" method="POST" id="delete-form">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                 </div>
             </div>
         </div>

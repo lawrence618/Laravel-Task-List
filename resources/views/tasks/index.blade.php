@@ -14,55 +14,58 @@
                             <x-primary-button>Add new product</x-primary-button>
                         </a>
                         <table class="min-w-full divide-y divide-gray-200 border mt-6 mb-6 ">
-                                    <thead>
-                                        <tr>
-                                            <th class="px-6 py-3 bg-gray-50 text-left">
-                                                <span
-                                                    class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Task Name</span>
-                                            </th>
-                                            <th class="px-6 py-3 bg-gray-50 text-left">
-                                                <span
-                                                    class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Description</span>
-                                            </th>
-                                            <th class="px-6 py-3 bg-gray-50 text-left">
-                                                <span
-                                                    class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Status</span>
-                                            </th>
-                                                <th class="px-6 py-3 bg-gray-50 text-left">
-                                                </th>
-                                        </tr>
-                                    </thead>
+                            <thead>
+                                <tr>
+                                    <th class="px-6 py-3 bg-gray-50 text-left">
+                                        <span
+                                            class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Task
+                                            Name</span>
+                                    </th>
+                                    <th class="px-6 py-3 bg-gray-50 text-left">
+                                        <span
+                                            class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Status</span>
+                                    </th>
+                                    <th class="px-6 py-3 bg-gray-50 text-left">
+                                    </th>
+                                </tr>
+                            </thead>
 
-                                    <tbody class="bg-white divide-y divide-gray-200 divide-solid">
-                                        @forelse($tasks as $task)
-                                            <tr class="bg-white">
-                                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                                    {{ $task->title }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                                    {{ $task->description }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                                    {{ $task->is_completed ? 'Completed' : 'Not Completed' }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                                    <a href="{{ route('tasks.show', $task->id) }}">
-                                                        <x-secondary-button>Show</x-secondary-button>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @empty
-                                            <tr class="bg-white">
-                                                <td colspan="2"
-                                                    class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                                    {{ __('No tasks found') }}
-                                                </td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
+                            <tbody class="bg-white divide-y divide-gray-200 divide-solid">
+                                @forelse($tasks as $task)
+                                    <tr class="bg-white">
+                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 ">
+                                            @if($task->is_completed)
+                                                <span class="text-gray-500">{{ $task->title }}</span>
+                                            @else
+                                                <span class="text-gray-900">{{ $task->title }}</span>
+
+                                            @endif
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 ">
+                                            @if($task->is_completed)
+                                                <span class="font-medium text-green-500">Completed</span>
+                                            @else
+                                                <span class="font-medium text-red-500">Not Completed</span>
+                                            @endif
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                                            <a href="{{ route('tasks.show', $task->id) }}">
+                                                <x-secondary-button>Show more</x-secondary-button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr class="bg-white">
+                                        <td colspan="2"
+                                            class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                                            {{ __('No tasks found') }}
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
                         </table>
                         {{ $tasks->links() }}
-                        
+
                     </div>
                 </div>
             </div>

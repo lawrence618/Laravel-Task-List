@@ -13,77 +13,50 @@
                         <form action="{{ route('tasks.update', $task) }}" method="POST">
                             @csrf
                             @method('PUT')
-
-
-                            <table class="min-w-full divide-y divide-gray-200 border mt-6 mb-6 ">
-                                <thead>
-                                    <tr>
-                                        <th class="px-6 py-3 bg-gray-50 text-left">
-                                            <span
-                                                class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Task Name</span>
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left">
-                                            <span
-                                                class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Description</span>
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left">
-                                            <span
-                                                class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Status</span>
-                                        </th>
-                                    </tr>
-                                </thead>
-
-                                <tbody class="bg-white divide-y divide-gray-200 divide-solid">
-                                    <tr class="bg-white">
-                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                            <input class="border-0 border-b-2 border-gray-200" type="text"
-                                                id="title" name="title" value="{{ $task->title }}" required />
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                            <textarea class="border-0 border-b-2 border-gray-200" type="text"
-                                                id="description" name="description"  value="" required >{{ $task->description }}</textarea>
-
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                            <div class="flex items-center">
-                                                <input type="checkbox" id="is_completed" name="is_completed" value="1" {{ $task->is_completed ? 'checked' : '' }} />
-                                                <label for="is_completed" class="ml-2">Completed</label>
+                            <div class="space-y-12">
+                                <div class="border-b border-gray-900/10 pb-12">
+                                    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                        <div class="sm:col-span-4">
+                                            <label for="title"
+                                                class="block text-sm font-medium leading-6 text-gray-900">Task
+                                                Name</label>
+                                            <div class="mt-2">
+                                                <div
+                                                    class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                                                    <input type="text" name="title" id="title"
+                                                        class="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                                        value="{{ $task->title }}" required />
+                                                </div>
                                             </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                                <div class="mb-6 flex justify-between">
+                                        </div>
 
-                                    <div>
-                                        <a href="{{ route('tasks.show', $task->id) }}">
-                                            <x-secondary-button>Cancel</x-secondary-button>
-                                        </a>
-                                        <a href="{{ route('tasks.show', $task->id) }}">
-                                            <x-primary-button>Update task</x-primary-button>
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <a onclick="return confirm('Are you sure?')">
-                                            <x-danger-button form="delete-form">Delete</x-danger-button>
-                                        </a>
+                                        <div class="col-span-full">
+                                            <label for="description"
+                                                class="block text-sm font-medium leading-6 text-gray-900">Description</label>
+                                            <div class="mt-2">
+                                                <textarea id="description" name="description" rows="3"
+                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ $task->description }}</textarea>
+                                            </div>
+
+                                            <p class="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about
+                                                the task.</p>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="checkbox" id="is_completed" name="is_completed" value="1"
+                                                {{ $task->is_completed ? 'checked' : '' }} />
+                                            <label for="is_completed" class="ml-2">Completed</label>
+                                        </div>
                                     </div>
                                 </div>
 
-                            @if ($errors->any())
-                                <div class="alert alert-danger" style="color: red">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
+                                <div class="mt-6 flex items-center justify-end gap-x-6">
+                                    <a href="{{ route('tasks.show', $task->id) }}">
+                                        <x-secondary-button>Cancel</x-secondary-button>
+                                    </a>
+                                    <a href="{{ route('tasks.show', $task->id) }}">
+                                        <x-primary-button>Update task</x-primary-button>
+                                    </a>
                                 </div>
-                            @endif
-
-                        </form>
-                        <form action="/tasks/{{ $task->id }}" method="POST" id="delete-form">
-                            @csrf
-                            @method('DELETE')
                         </form>
                     </div>
                 </div>
