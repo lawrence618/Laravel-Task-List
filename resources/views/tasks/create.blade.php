@@ -28,7 +28,7 @@
                                     <tr class="bg-white">
                                         <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                             <input
-                                                class="border-0 border-b-2 border-gray-200 @error('title') border-red-500 @enderror"
+                                                class="border-0 border-b-2 ring-gray-200 @error('title') border-red-500 @enderror"
                                                 type="text" id="title" name="title" placeholder="Enter task title"
                                                 value="{{ old('title') }}" required />
                                             @error('title')
@@ -50,7 +50,7 @@
                                     <tr class="bg-white">
                                         <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                             <textarea
-                                                class="border-0 border-b-2 border-gray-200 @error('description') border-red-500 @enderror"
+                                                class="border-0 border-b-2 ring-gray-200 @error('description') border-red-500 @enderror"
                                                 id="description" name="description" rows="5"
                                                 placeholder="Enter task description"
                                                 required>{{ old('description') }}</textarea>

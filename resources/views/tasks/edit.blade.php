@@ -22,11 +22,15 @@
                                                 Name</label>
                                             <div class="mt-2">
                                                 <div
-                                                    class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                                                    class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md @error('title') border-red-500 @enderror">
                                                     <input type="text" name="title" id="title"
                                                         class="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                                         value="{{ $task->title }}" required />
+
                                                 </div>
+                                                @error('title')
+                                                    <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
 
@@ -35,11 +39,14 @@
                                                 class="block text-sm font-medium leading-6 text-gray-900">Description</label>
                                             <div class="mt-2">
                                                 <textarea id="description" name="description" rows="3"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ $task->description }}</textarea>
+                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 @error('description') border-red-500 @enderror">{{ $task->description }}</textarea>
                                             </div>
 
                                             <p class="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about
                                                 the task.</p>
+                                            @error('description')
+                                                <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+                                            @enderror
                                         </div>
                                         <div class="flex items-center">
                                             <input type="checkbox" id="is_completed" name="is_completed" value="1"
